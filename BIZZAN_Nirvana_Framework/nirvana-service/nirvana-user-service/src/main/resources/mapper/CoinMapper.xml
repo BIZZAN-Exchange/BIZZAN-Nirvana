@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bizzan.nirvana.user.mapper.CoinMapper">
+
+    <select id="findAllNameAndUnit" resultType="com.bizzan.nirvana.dto.CoinDTO">
+        select name,unit from coin
+    </select>
+    <select id="getContractByProtocol" resultType="com.bizzan.nirvana.user.dto.ContractDTO">
+        select c.coin_name as name,c.ext as address,c.decimals,t.min_num as min_collect_amount
+        from coinext c
+         LEFT JOIN coinprotocol p on p.protocol=c.protocol
+         left join automainconfig t on t.coin_name=c.coin_name and t.protocol=p.protocol
+        where p.symbol = #{protocol} and c.ext != ''
+    </select>
+    <select id="findAllName" resultType="java.lang.String">
+        select name from coin
+    </select>
+</mapper>

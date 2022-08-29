@@ -1,0 +1,940 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/home/home",
+			"style": {
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none",
+					"pullToRefresh": {
+						"offset": "75px",
+						"style": "circle",
+						"color": "#2C54D7"
+					}
+				},
+				"enablePullDownRefresh": true
+			}
+
+		},
+		{
+			"path": "pages/update/index",
+			"style": {
+				"navigationBarTitleText": "软件更新",
+				"navigationBarBackgroundColor": "#2C54D7",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
+
+				"app-plus": {
+					"titleNView": {
+						"backgroundColor": "#2C54D7"
+					},
+					"pullToRefresh": {
+						"support": true,
+						"color": "#007AFF",
+						"style": "circle"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/mine/login",
+			"style": {
+				"navigationBarTitleText": "",
+				"backgroundColor": "#102030",
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none",
+					"pullToRefresh": {
+						"offset": "75px",
+						"style": "circle",
+						"color": "#2C54D7"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/trade/trade",
+			"style": {
+				"navigationBarTitleText": "",
+				"backgroundColor": "#102030",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none",
+					"pullToRefresh": {
+						"offset": "55px",
+						"style": "circle",
+						"color": "#2C54D7"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/trade/entrust",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": true
+			},
+			"meta": {
+			    "loginRequire": true
+			}
+		},
+		{
+			"path": "pages/lever/entrust",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/lever/leverGather", 
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"backgroundColor": "#102030",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none",
+					"pullToRefresh": {
+						"offset": "55px",
+						"style": "circle",
+						"color": "#2C54D7"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/lever/lever", 
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"backgroundColor": "#102030",
+				// "enablePullDownRefresh": true,
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none",
+					"pullToRefresh": {
+						"offset": "55px",
+						"style": "circle",
+						"color": "#2C54D7"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/lever/option",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"backgroundColor": "#102030",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none",
+					"pullToRefresh": {
+						"offset": "55px",
+						"style": "circle",
+						"color": "#2C54D7"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/lever/second",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"backgroundColor": "#102030",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none",
+					"pullToRefresh": {
+						"offset": "55px",
+						"style": "circle",
+						"color": "#2C54D7"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/lever/whitePaper",
+			"style": {
+				"navigationBarTitleText": "",
+				"backgroundColor": "#102030",
+				"app-plus": {
+			
+			
+				}
+			}
+		},
+		{
+			"path": "pages/lever/leverList",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"backgroundColor": "#102030",
+				"app-plus": {
+					"titleNView": false
+
+				}
+			}
+		},
+		{
+			"path": "pages/lever/orderList",
+			"style": {
+				"navigationBarTitleText": "",
+				"backgroundColor": "#102030",
+				"app-plus": {
+
+
+				}
+			}
+		},
+		{
+			"path": "pages/lever/orderDatil",
+			"style": {
+				"navigationBarTitleText": "委托详情",
+				"backgroundColor": "#102030",
+				"app-plus": {
+		
+		
+				}
+			}
+		},
+		{
+			"path": "pages/legal/legal",
+			"style": {
+				"navigationBarTitleText": "法币"
+			},
+			"meta": {
+			    "loginRequire": true
+			}
+		},
+		{
+			"path": "pages/legal/legalOrder",
+			"style": {
+				"navigationBarTitleText": "购买USDT"
+			}
+		},
+		{
+			"path": "pages/legal/legalOrder2",
+			"style": {
+				"navigationBarTitleText": "出售USDT"
+			}
+		},
+		{
+			"path": "pages/legal/appeal",
+			"style": {
+				"navigationBarTitleText": "订单申诉"
+			}
+		},
+		{
+			"path": "pages/legal/store",
+			"style": {
+				"navigationBarTitleText": "我的店铺"
+			}
+		},
+		{
+			"path": "pages/legal/storeDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"backgroundColor": "#0b53bd"
+				// "app-plus":{
+				// 	"titleNView":{
+				// 		"buttons":[{
+				// 			"text":"记录",
+				// 			"color":"#999999",
+				// 			"float":"right",
+				// 			"fontSize":"12",
+				// 			"width":"70px"
+				// 		}]
+				// 	}
+				// }
+			}
+		},
+		{
+			"path": "pages/legal/transactionRecord",
+			"style": {
+				"navigationBarTitleText": "余额日志"
+			}
+		},
+		{
+			"path": "pages/legal/transfer",
+			"style": {
+				"navigationBarTitleText": "划转"
+			}
+		},
+		{
+			"path": "pages/legal/storeOrder",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"backgroundColor": "#0b53bd",
+				"app-plus": {
+					"titleNView": false
+
+				}
+			}
+		},
+		{
+			"path": "pages/legal/orderDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"backgroundColor": "#0b53bd",
+				"app-plus": {
+					"titleNView": false
+
+				}
+			}
+		},
+		{
+			"path": "pages/legal/order",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"backgroundColor": "#0b53bd",
+				"app-plus": {
+					"titleNView": false
+
+				}
+			}
+		},
+		{
+			"path": "pages/legal/recordlist",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"backgroundColor": "#0b53bd",
+				"app-plus": {
+					"titleNView": false
+
+				}
+			}
+		},
+		{
+			"path": "pages/legal/finished",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"backgroundColor": "#0b53bd",
+				"app-plus": {
+					"titleNView": false
+
+				}
+			}
+		},
+		{
+			"path": "pages/mine/register",
+			"style": {
+				"navigationBarTitleText": "",
+				"titleNView":false,
+				"app-plus": {
+					"background":"#0b53bd" //此处背景色与页面中一致
+				}
+			}
+		},
+		{
+			"path": "pages/mine/registerEmail",
+			"style": {
+				"navigationBarTitleText": "",
+				"titleNView":false,
+				"app-plus": {
+					"background":"#0b53bd" //此处背景色与页面中一致
+				}
+			}
+		},
+		{
+			"path": "pages/mine/setPwd",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/mine/systemSetting",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/assets/language",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/mine/modifyPwd",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/mine/bindingMobile",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/mine/bindingMailbox",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/mine/bindingGoogle",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/mine/jcGoogle",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/mine/capitalPwd",
+			"style": {
+				"navigationBarTitleText": ""
+			},
+			"meta": {
+			    "loginRequire": true
+			}
+		},
+		{
+			"path": "pages/mine/setPassword",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/mine/help",
+			"style": {
+				"navigationBarTitleText": "帮助中心"
+			}
+		},
+		{
+			"path": "pages/mine/helpDetail",
+			"style": {
+				"navigationBarTitleText": "帮助中心详情",
+				"titleNView":false,
+				"app-plus": {
+					"background":"#0b53bd" //此处背景色与页面中一致
+				}
+			}
+		},
+		{
+			"path": "pages/mine/helpMore",
+			"style": {
+				"navigationBarTitleText": "帮助中心详情"
+			}
+		},
+		{
+			"path": "pages/market/market",
+			"style": {
+				"navigationBarTitleText": "Markets",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/market/kline",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#102030",
+				"navigationBarTextStyle": "black",
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/home/news",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/home/notice",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/security/security",
+			"style": {
+				"navigationBarTitleText": "security"
+			}
+		},
+		{
+			"path": "pages/home/newsDetail",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/home/agreement",
+			"style": {
+				"navigationBarTitleText": "详情"
+			}
+		},
+		{
+			"path": "pages/mine/forgetPwd",
+			"style": {
+				"navigationBarTitleText": "忘记密码",
+				"titleNView":false,
+				"app-plus": {
+					"background":"#0b53bd" //此处背景色与页面中一致
+				}
+			}
+		},
+		{
+			"path": "pages/mine/mailboxForgetPwd",
+			"style": {
+				"navigationBarTitleText": "忘记密码",
+				"titleNView":false,
+				"app-plus": {
+					"background":"#0b53bd" //此处背景色与页面中一致
+				}
+			}
+		},
+		{
+			"path": "pages/mine/forgetPwdNext",
+			"style": {
+				"navigationBarTitleText": "重置密码"
+			}
+		},
+		{
+			"path": "pages/mine/setup",
+			"style": {
+				"navigationBarTitleText": ""
+			},
+			"meta": {
+			    "loginRequire": true
+			}
+		},
+		{
+			"path": "pages/mine/withdrawalAddress",
+			"style": {
+				"navigationBarTitleText": "提币地址"
+			}
+		},
+		{
+			"path": "pages/mine/withdrawalAddressList",
+			"style": {
+				"navigationBarTitleText": "提币地址列表"
+			}
+		},
+		{
+			"path": "pages/mine/addWithdrawalAddress",
+			"style": {
+				"navigationBarTitleText": "添加提币地址"
+			}
+		},
+		{
+			"path": "pages/assets/assets",
+			"style": {
+				"navigationBarTitleText": "资产",
+				"titleNView":false,
+				"app-plus": {
+					"background":"#0b53bd" //此处背景色与页面中一致
+				}
+			},
+			"meta": {
+			    "loginRequire": true
+			}
+		},
+		{
+			"path": "pages/assets/myinfo",
+			"style": {
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none",
+					"pullToRefresh": {
+						"offset": "75px",
+						"style": "circle",
+						"color": "black"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/assets/myOrder",
+			"style": {
+				"navigationBarTitleText": "我的订单"
+			},
+			"meta": {
+			    "loginRequire": true
+			}
+		},
+		{
+			"path": "pages/assets/orderDatil",
+			"style": {
+				"navigationBarTitleText": "订单详情",
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none",
+					"pullToRefresh": {
+						"offset": "75px",
+						"style": "circle",
+						"color": "black"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/assets/myAdvertisement",
+			"style": {
+				"navigationBarTitleText": "我的广告",
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none",
+					"pullToRefresh": {
+						"offset": "75px",
+						"style": "circle",
+						"color": "black"
+					}
+				}
+			},
+			"meta": {
+			    "loginRequire": true
+			}
+		},
+		{
+			"path": "pages/assets/advertising",
+			"style": {
+				"navigationBarTitleText": "发布广告"
+			}
+		},
+		{
+			"path": "pages/assets/revise",
+			"style": {
+				"navigationBarTitleText": "修改广告"
+			}
+		},
+		{
+			"path": "pages/mine/userCenter",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		},
+		{
+			"path": "pages/mine/identity",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/mine/authentication",
+			"style": {
+				"navigationBarTitleText": "身份认证"
+			}
+		},
+		{
+			"path": "pages/assets/tradeAccount",
+			"style": {
+				"navigationBarTitleText": "交易账户",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/assets/charge",
+			"style": {
+				"navigationBarTitleText": "充币"
+			}
+		},
+		{
+			"path": "pages/assets/assetFlow",
+			"style": {
+				"navigationBarTitleText": "资产流水",
+				"enablePullDownRefresh": true,
+				"titleNView":false
+			},
+			"meta": {
+			    "loginRequire": true
+			}
+		},
+		{
+			"path": "pages/assets/chargeList",
+			"style": {
+				"navigationBarTitleText": "选择币种"
+			}
+		},
+		{
+			"path": "pages/assets/mention",
+			"style": {
+				"navigationBarTitleText": "提币",
+				"titleNView":false
+			}
+		},
+		{
+			"path": "pages/assets/mentionUsdtList",
+			"style": {
+				"navigationBarTitleText": ""
+				
+			}
+		},
+		{
+			"path": "pages/assets/withdrawalRecord",
+			"style": {
+				"navigationBarTitleText": "提现记录",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/assets/mentionList",
+			"style": {
+				"navigationBarTitleText": "选择币种"
+			}
+		},
+		{
+			"path": "pages/mine/collect_money",
+			"style": {
+				"navigationBarTitleText": "收款信息"
+			}
+		},
+		{
+			"path": "pages/assets/collectionSettings",
+			"style": {
+				"navigationBarTitleText": "收款设置"
+			},
+			"meta": {
+			    "loginRequire": true
+			}
+		},
+		{
+			"path": "pages/assets/alipay",
+			"style": {
+				"navigationBarTitleText": "支付宝"
+			}
+		},
+		{
+			"path": "pages/assets/wechatPay",
+			"style": {
+				"navigationBarTitleText": "微信"
+			}
+		},
+		{
+			"path": "pages/assets/withdrawalCodeRecharge",
+			"style": {
+				"navigationBarTitleText": "提币码充币"
+			}
+		},
+		{
+			"path": "pages/assets/withdrawalCodeExtract",
+			"style": {
+				"navigationBarTitleText": "提币码提币"
+			}
+		},
+		{
+			"path": "pages/assets/bankInfo",
+			"style": {
+				"navigationBarTitleText": "银行卡"
+			}
+		},
+		{
+			"path": "pages/assets/bankInfoList",
+			"style": {
+				"navigationBarTitleText": "银行卡"
+			}
+		},
+		{
+			"path": "pages/assets/modifyBank",
+			"style": {
+				"navigationBarTitleText": "修改银行卡"
+			}
+		},
+		{
+			"path": "pages/mine/addBack",
+			"style": {
+				"navigationBarTitleText": "添加银行卡"
+			}
+		},
+		{
+			"path": "pages/assets/bindMentionAddress",
+			"style": {
+				"navigationBarTitleText": "绑定提币地址"
+			}
+		},
+		{
+			"path": "pages/mine/invite",
+			"style": {
+				"navigationBarTitleText": "我的推广码"
+			},
+			"meta": {
+			    "loginRequire": true
+			}
+		},
+		{
+			"path": "pages/mine/security",
+			"style": {
+				"navigationBarTitleText": "安全中心"
+			}
+		},
+		{
+			"path": "pages/mine/resetLegalPwd",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/mine/real_authentication",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/mine/about",
+			"style": {
+				"navigationBarTitleText": "关于我们"
+			}
+		},
+		{
+			"path": "pages/mine/policy",
+			"style": {
+				"navigationBarTitleText": "隐私政策"
+			}
+		},
+		{
+			"path": "pages/assets/transfer",
+			"style": {
+				"navigationBarTitleText": "划转",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/assets/transferTolever",
+			"style": {
+				"navigationBarTitleText": "划转",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/mine/authorization_code",
+			"style": {
+				"navigationBarTitleText": "授权码",
+				"enablePullDownRefresh": true
+			}
+		}, 
+		{
+			"path": "pages/mine/account_transfer",
+			"style": {
+				"navigationBarTitleText": "账号迁移"
+			}
+		},
+		{
+			"path": "pages/business/businessOne",
+			"style":{
+				"navigationBarTitleText":"商家认证",
+				"navigationBarBackgroundColor":"#1A212B"
+			}
+		},
+		{
+			"path": "pages/business/businessTwo",
+			"style":{
+				"navigationBarTitleText":"商家认证",
+				"navigationBarBackgroundColor":"#1A212B"
+			}
+		},
+		{
+			"path":"pages/chat/chat",
+			"style":{
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path":"pages/chat/chats",
+			"style":{
+				"navigationStyle":"custom",
+				"app-plus":{
+					"scrollIndicator":false,
+					"softinputMode":"adjustResize"
+				}
+			}
+		},
+		
+		{
+			"path": "uni_modules/uni-upgrade-center-app/pages/upgrade-popup",
+			"style": {
+				"disableScroll": true,
+				"app-plus": {
+					"backgroundColorTop": "transparent",
+					"background": "transparent",
+					"titleNView": false,
+					"scrollIndicator": false,
+					"popGesture": "none",
+					"animationType": "fade-in",
+					"animationDuration": 200
+		
+				}
+			}
+		}
+		
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "DEMO",
+		"navigationBarBackgroundColor": "#102030",
+		"backgroundColorTop": "#102030",
+		// "backgroundColor": "#061623",
+		"backgroundTextStyle": "dark"
+	},
+	"tabBar": {
+		"color": "#a2a6a5",
+		"selectedColor": "#EFA70A",
+		// "borderStyle" : "#eeeeee",
+		"backgroundColor": "#182129",
+		"list": [{
+				"pagePath": "pages/home/home",
+				"iconPath": "static/appImage/home_one_no_color.png",
+				"selectedIconPath": "static/appImage/home_one_color.png",
+				"text": ""
+			},
+			{
+				"pagePath": "pages/market/market",
+				"iconPath": "static/appImage/home_two_no_color.png",
+				"selectedIconPath": "static/appImage/home_two_color.png",
+				"text": ""
+			},
+			{
+				"pagePath": "pages/trade/trade",
+				"iconPath": "static/appImage/home_three_no_color.png",
+				"selectedIconPath": "static/appImage/home_three_color.png",
+				"text": ""
+			},
+			{
+				"pagePath": "pages/lever/leverGather",
+				"iconPath": "static/appImage/home_five_no_color.png",
+				"selectedIconPath": "static/appImage/home_five_color.png",
+				"text": ""
+			},
+			{
+				"pagePath": "pages/assets/myinfo",
+				"iconPath": "static/appImage/home_six_no_color.png",
+				"selectedIconPath": "static/appImage/home_six_color.png",
+				"text": ""
+			}
+			// {
+			// 	"pagePath": "pages/assets/assets",
+			// 	"iconPath": "static/appImage/home_six_no_color.png",
+			// 	"selectedIconPath": "static/appImage/home_six_color.png",
+			// 	"text": "资产"
+			// }
+		]
+	},
+	"condition" : { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [
+			{
+				"name": "", //模式名称
+				"path": "", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
+			}
+		]
+	}
+}

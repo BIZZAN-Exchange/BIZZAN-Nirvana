@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: nirvana-second
+  cloud:
+    nacos:
+      config:
+        file-extension: yaml
+        server-addr: ${nacos.server-addr}
+        shared-configs: base.yaml,email-sms.yaml,nirvana-seata.yaml
+      discovery:
+        #Nacos的注册地址
+        server-addr: ${nacos.server-addr}

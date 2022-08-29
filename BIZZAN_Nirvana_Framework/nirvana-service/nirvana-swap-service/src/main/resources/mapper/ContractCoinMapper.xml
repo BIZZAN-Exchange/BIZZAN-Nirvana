@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bizzan.nirvana.swap.mapper.ContractCoinMapper">
+
+    <select id="getBaseSymbol" resultType="java.lang.String">
+        select distinct base_symbol from contract_coin where enable = 1 order by sort ASC
+    </select>
+
+    <update id="increaseOpenFee">
+        update contract_coin coin set coin.total_open_fee=coin.total_open_fee+#{openFee} where coin.id = #{cid}
+    </update>
+
+    <update id="increaseCloseFee">
+        update contract_coin coin set coin.total_close_fee=coin.total_close_fee+#{closeFee} where coin.id = #{cid}
+    </update>
+
+    <update id="increaseTotalLoss">
+        update contract_coin coin set coin.total_loss=coin.total_loss+#{amount} where coin.id = #{cid}
+    </update>
+
+    <update id="increaseTotalProfit">
+        update contract_coin coin set coin.total_profit=coin.total_profit+#{amount} where coin.id = #{cid}
+    </update>
+</mapper>

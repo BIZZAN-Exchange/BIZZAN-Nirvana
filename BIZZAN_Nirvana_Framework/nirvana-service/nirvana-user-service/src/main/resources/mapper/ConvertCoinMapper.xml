@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bizzan.nirvana.user.mapper.ConvertCoinMapper">
+
+    <select id="findByCoinUnit" resultType="com.bizzan.nirvana.user.entity.ConvertCoin">
+        select * from convert_coin where coin_unit = #{coinUnit}
+    </select>
+    <select id="findByStatus" resultType="com.bizzan.nirvana.user.entity.ConvertCoin">
+        select * from convert_coin where status = #{status}
+    </select>
+</mapper>

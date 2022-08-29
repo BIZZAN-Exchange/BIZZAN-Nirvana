@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>nirvana</artifactId>
+        <groupId>com.bizzan</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <description>
+        所有数据库表对应的Bean和Feign接口
+    </description>
+    <artifactId>nirvana-api</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>nirvana-permission-api</module>
+        <module>nirvana-user-api</module>
+        <module>nirvana-active-api</module>
+        <module>nirvana-admin-api</module>
+        <module>nirvana-exchange-api</module>
+        <module>nirvana-market-api</module>
+        <module>nirvana-swap-api</module>
+        <module>nirvana-second-api</module>
+        <module>nirvana-option-api</module>
+        <module>nirvana-p2p-api</module>
+        <module>nirvana-robot-market-api</module>
+        <module>nirvana-robot-normal-api</module>
+        <module>nirvana-coinswap-api</module>
+        <module>nirvana-earn-api</module>
+    </modules>
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+    <dependencies>
+        <!--MyBatis Plus-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.3.2</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--工具包-->
+        <dependency>
+            <groupId>com.bizzan</groupId>
+            <artifactId>nirvana-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <!--openfeign-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>2.2.5.RELEASE</version>
+        </dependency>
+
+        <!--JPA-->
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+    </dependencies>
+</project>

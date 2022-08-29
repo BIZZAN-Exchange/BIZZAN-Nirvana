@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bizzan.nirvana.swap.mapper.ContractOrderEntrustMapper">
+
+    <select id="loadUnMatchOrders" resultType="com.bizzan.nirvana.swap.entity.ContractOrderEntrust">
+        select * from contract_order_entrust where status = 0 and contract_id = #{contractId}
+    </select>
+
+    <update id="updateStatus">
+        update contract_order_entrust contract set contract.status = #{status} where contract.id = #{eid}
+    </update>
+
+    <update id="updateReward">
+        update contract_order_entrust o set o.is_reward = #{isReward} where o.id = #{id}
+    </update>
+</mapper>

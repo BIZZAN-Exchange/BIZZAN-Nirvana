@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bizzan.nirvana.user.mapper.MemberInviteStasticMapper">
+
+    <select id="topInviteCountByType" resultType="com.bizzan.nirvana.user.entity.MemberInviteStasticRank">
+        select * from member_invite_stastic_rank
+        where type = #{type}
+        order by stastic_date desc, level_one desc limit #{count}
+    </select>
+
+    <select id="getTopTotalAmount" resultType="com.bizzan.nirvana.user.entity.MemberInviteStastic">
+        select * from member_invite_stastic order by estimated_reward desc limit #{count}
+    </select>
+
+    <select id="getTopInviteCount" resultType="com.bizzan.nirvana.user.entity.MemberInviteStastic">
+        select * from member_invite_stastic order by level_one desc limit #{count}
+    </select>
+</mapper>

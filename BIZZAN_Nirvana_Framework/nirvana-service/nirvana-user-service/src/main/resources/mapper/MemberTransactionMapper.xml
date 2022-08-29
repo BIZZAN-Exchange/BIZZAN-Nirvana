@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bizzan.nirvana.user.mapper.MemberTransactionMapper">
+
+    <select id="joinFind" resultType="com.bizzan.nirvana.user.vo.MemberTransactionVO">
+        select mt.*,m.username as member_username,m.mobile_phone as phone,m.email,m.real_name as member_real_name
+        from member_transaction mt
+        left join member m on m.id=mt.member_id
+        <where>
+            <if test="screen.inviterId !=null">
+                m.inviter_id = #{inviterId}
+            </if>
+            <if test="screen.memberId !=null">
+                and mt.member_id = #{screen.memberId}
+            </if>
+            <if test="screen.account !=null and screen.account!=''">
+               and ( m.username like concat('%',#{screen.account},'%') or m.real_name like concat('%',#{screen.account},'%') )
+            </if>
+            <if test="screen.symbol !=null and screen.symbol!=''">
+                and mt.symbol = #{screen.symbol}
+            </if>
+            <if test="screen.startTime !=null ">
+                and mt.create_time &gt;= #{screen.startTime}
+            </if>
+            <if test="screen.endTime !=null ">
+                and mt.create_time &lt; #{screen.endTime}
+            </if>
+            <if test="screen.type !=null ">
+                and mt.type= #{screen.type}
+            </if>
+            <if test="screen.minMoney !=null ">
+                and mt.amount &gt;= #{screen.minMoney}
+            </if>
+            <if test="screen.maxMoney !=null ">
+                and mt.amount &lt;= #{screen.maxMoney}
+            </if>
+            <if test="screen.minFee !=null ">
+                and mt.fee &gt;= #{screen.minFee}
+            </if>
+            <if test="screen.maxFee !=null ">
+                and mt.fee &lt;= #{screen.maxFee}
+            </if>
+        </where>
+        order by mt.create_time desc
+    </select>
+</mapper>

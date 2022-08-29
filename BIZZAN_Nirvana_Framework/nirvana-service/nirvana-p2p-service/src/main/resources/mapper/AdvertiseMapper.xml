@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bizzan.nirvana.p2p.mapper.AdvertiseMapper">
+
+    <update id="alterStatusBatch">
+        update advertise a set a.status = #{status},a.updateTime=#{updateTime}
+        where a.id in
+          <foreach collection="ids" item="id" separator="," open="(" close=")" index="index">
+            #{id}
+          </foreach>
+    </update>
+    <update id="putOffAdvertise">
+        update advertise a set a.status=1,a.remain_amount=0,a.number=0
+        <where>
+            a.remain_amount=#{amount}
+            and a.id=#{id} and a.status=0
+        </where>
+    </update>
+    <update id="updateAdvertiseDealAmount">
+        update advertise a set a.deal_amount=a.deal_amount-#{amount} where a.deal_amount>=#{amount} and a.id=#{id}
+    </update>
+    <update id="updateAdvertiseAmount">
+        update advertise a set a.remain_amount=a.remain_amount-#{amount},a.deal_amount=a.deal_amount+#{amount}
+        where a.remain_amount &gt;= #{amount} and a.status=#{status} and a.id=#{id}
+    </update>
+    <select id="selectSellAutoOffShelves" resultType="com.bizzan.nirvana.p2p.vo.AdvertiseVo">
+        SELECT b.* FROM (SELECT
+        a.*, CAST(
+        a.min_limit / (
+        CASE a.price_type
+        WHEN 0 THEN
+        a.price
+        ELSE
+        round(
+        (
+        (a.premise_rate + 100) / 100 * #{marketPrice}
+        ),
+        2
+        )
+        END
+        ) AS DECIMAL (18, 8)
+        ) min_withdraw_amount
+        FROM
+        advertise a
+        WHERE
+        a.`status` = 0
+        AND a.advertise_type = 1
+        AND a.coin_id = #{coinId}) b WHERE b.remain_amount &lt; ROUND(((#{jyRate} + 100) / 100 * b.min_withdraw_amount),8)
+
+    </select>
+    <select id="selectBuyAutoOffShelves" resultType="com.bizzan.nirvana.p2p.vo.AdvertiseVo">
+        SELECT b.* FROM (SELECT
+        a.*, CAST(
+        a.min_limit / (
+        CASE a.price_type
+        WHEN 0 THEN
+        a.price
+        ELSE
+        round(
+        (
+        (a.premise_rate + 100) / 100 * #{marketPrice}
+        ),
+        2
+        )
+        END
+        ) AS DECIMAL (18, 8)
+        ) min_withdraw_amount
+        FROM
+        advertise a
+        WHERE
+        a.`status` = 0
+        AND a.advertise_type = 0
+        AND a.coin_id = #{coinId}) b WHERE b.remain_amount &lt; b.min_withdraw_amount;
+    </select>
+    <select id="getAdvertiserNum" resultType="java.lang.Long">
+        select count(a.id) from advertise a where a.member_id = #{memberId}
+    </select>
+    <select id="paginationAdvertise" resultType="com.bizzan.nirvana.p2p.entity.Advertise">
+        SELECT a.*, (CASE a.price_type WHEN 0 THEN a.price ELSE round((( a.premise_rate + 100 ) / 100 * #{marketPrice}),2) END) final_price
+        FROM
+            advertise a
+        where
+          a.coin_id = #{coinId}
+          AND a.advertise_type = #{advertiseType}
+          AND a.`status` = 0
+        ORDER BY
+        <if test="advertiseType == 1">
+            final_price ASC
+        </if>
+        <if test="advertiseType == 0">
+            final_price DESC
+        </if>
+        , a.id ASC
+    </select>
+    <select id="getPriceBySql" resultType="java.util.Map">
+        SELECT
+            d.*
+        FROM
+            (
+                SELECT
+                    c.coin_id,
+                    (
+                        CASE
+                            WHEN c.price_type = 0
+                                AND c.price = b.minPrice THEN
+                                c.id
+                            WHEN c.price_type = 1
+                                AND round((( c.premise_rate + 100) / 100 * #{price}), 2 ) = b.minPrice THEN
+                                c.id
+                            END
+                        ) advertise_id,
+                    b.minPrice
+                FROM
+                    advertise c
+                        JOIN (
+                        SELECT
+                            a.coin_id,
+                            <if test="type==1">
+                                min(
+                            </if>
+                            <if test="type==0">
+                                max(
+                            </if>
+                                CASE
+                                    a.price_type
+                                WHEN 0 THEN
+                                    a.price ELSE round((( a.premise_rate + 100 ) / 100 * #{price}), 2 )
+                                END
+                                ) minPrice,
+                            a.advertise_type,
+                            a.`status`
+                        FROM
+                            advertise a
+                        WHERE
+                            a.STATUS = 0
+                          AND a.advertise_type = #{type}
+                        GROUP BY
+                            a.coin_id
+                    ) b ON c.coin_id = b.coin_id
+                        AND c.advertise_type = b.advertise_type
+                        AND c.`status` = b.STATUS
+                        AND c.coin_id = #{coinId}
+            ) d
+        WHERE
+            d.advertise_id IS NOT NULL
+        GROUP BY
+            d.coin_id;
+    </select>
+</mapper>

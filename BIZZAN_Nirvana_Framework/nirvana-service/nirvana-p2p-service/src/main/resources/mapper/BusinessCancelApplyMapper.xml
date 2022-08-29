@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bizzan.nirvana.p2p.mapper.BusinessCancelApplyMapper">
+
+    <select id="getBusinessStatistics" resultType="java.util.Map">
+        select sum(b.commission) as fee,sum(b.money) as money from otc_order b
+        where  b.status = 3 and b.member_id = #{memberId}
+    </select>
+    <select id="getBusinessAppealInitiatorIdStatistics" resultType="java.lang.Long">
+        select count(a.id) as complainantNum from appeal a where a.initiator_id = #{memberId}
+    </select>
+    <select id="getBusinessAppealAssociateIdStatistics" resultType="java.lang.Long">
+        select count(a.id) as defendantNum from appeal a where a.associate_id = #{memberId}
+    </select>
+</mapper>

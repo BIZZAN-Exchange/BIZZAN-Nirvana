@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bizzan.nirvana.coinswap.mapper.MemberContractWalletCoinMapper">
+
+    <update id="modifyCoinBuyLeverage">
+        update member_contract_wallet_coin wallet set wallet.coin_buy_leverage = #{leverage} where wallet.id = #{walletId}
+    </update>
+
+    <update id="modifyCoinSellLeverage">
+        update member_contract_wallet_coin wallet set wallet.coin_sell_leverage = #{leverage} where wallet.id = #{walletId}
+    </update>
+
+    <update id="decreaseCoinFrozen">
+        update member_contract_wallet_coin wallet set wallet.coin_frozen_balance=wallet.coin_frozen_balance - #{amount} where wallet.id = #{walletId} and wallet.coin_frozen_balance >= #{amount}
+    </update>
+
+    <update id="thawCoinBalance">
+        update member_contract_wallet_coin wallet set wallet.coin_balance = wallet.coin_balance + #{amount},wallet.coin_frozen_balance=wallet.coin_frozen_balance - #{amount} where wallet.id = #{walletId} and wallet.coin_frozen_balance >= #{amount}
+    </update>
+
+    <update id="freezeCoinBalance">
+        update member_contract_wallet_coin wallet set wallet.coin_balance = wallet.coin_balance - #{amount},wallet.coin_frozen_balance=wallet.coin_frozen_balance + #{amount} where wallet.id = #{walletId} and wallet.coin_balance >= #{amount}
+    </update>
+
+    <update id="increaseCoinBuyPrincipalAmountWithFrozen">
+        update member_contract_wallet_coin wallet set wallet.coin_buy_principal_amount=wallet.coin_buy_principal_amount + #{amount},wallet.coin_frozen_balance=wallet.coin_frozen_balance - #{amount} where wallet.id = #{walletId} and wallet.coin_frozen_balance >= #{amount}
+    </update>
+
+    <update id="increaseCoinSellPrincipalAmountWithFrozen">
+        update member_contract_wallet_coin wallet set wallet.coin_sell_principal_amount=wallet.coin_sell_principal_amount + #{amount},wallet.coin_frozen_balance=wallet.coin_frozen_balance - #{amount} where wallet.id = #{walletId} and wallet.coin_frozen_balance >= #{amount}
+    </update>
+
+    <update id="updateCoinBuyPriceAndPosition">
+        update member_contract_wallet_coin wallet set wallet.coin_buy_price=#{avaPrice},wallet.coin_buy_position=wallet.coin_buy_position + #{volume} where wallet.id = #{walletId}
+    </update>
+
+    <update id="updateCoinSellPriceAndPosition">
+        update member_contract_wallet_coin wallet set wallet.coin_sell_price=#{avaPrice},wallet.coin_sell_position=wallet.coin_sell_position + #{volume} where wallet.id = #{walletId}
+    </update>
+
+    <update id="updateShareNumber">
+        update member_contract_wallet_coin wallet set wallet.coin_share_number=#{shareNumber} where wallet.id = #{walletId}
+    </update>
+
+    <update id="decreaseCoinFrozenSellPositionAndPrincipalAmount">
+        update member_contract_wallet_coin wallet set wallet.coin_sell_principal_amount=wallet.coin_sell_principal_amount - #{pAmount},wallet.coin_frozen_sell_position=wallet.coin_frozen_sell_position - #{volume} where wallet.id = #{walletId} and wallet.coin_sell_principal_amount>=#{pAmount} and wallet.coin_frozen_sell_position>=#{volume}
+    </update>
+
+    <update id="increaseCoinBalance">
+        update member_contract_wallet_coin wallet set wallet.coin_balance = wallet.coin_balance + #{amount} where wallet.id = #{walletId}
+    </update>
+
+    <update id="increaseCoinProfit">
+        update member_contract_wallet_coin wallet set wallet.coin_profit=wallet.coin_profit+#{amount} where wallet.id = #{walletId}
+    </update>
+
+    <update id="increaseCoinLoss">
+        update member_contract_wallet_coin wallet set wallet.coin_loss=wallet.coin_loss+#{amount} where wallet.id = #{walletId}
+    </update>
+
+    <update id="decreaseCoinFrozenBuyPositionAndPrincipalAmount">
+        update member_contract_wallet_coin wallet set wallet.coin_buy_principal_amount=wallet.coin_buy_principal_amount - #{pAmount},wallet.coin_frozen_buy_position=wallet.coin_frozen_buy_position - #{volume} where wallet.id = #{walletId} and wallet.coin_buy_principal_amount>=#{pAmount} and wallet.coin_frozen_buy_position>=#{volume}
+    </update>
+
+    <update id="freezeCoinSellPosition">
+        update member_contract_wallet_coin wallet set wallet.coin_frozen_sell_position = wallet.coin_frozen_sell_position + #{amount},wallet.coin_sell_position=wallet.coin_sell_position - #{amount} where wallet.id = #{walletId} and wallet.coin_sell_position >= #{amount}
+    </update>
+
+    <update id="freezeCoinBuyPosition">
+        update member_contract_wallet_coin wallet set wallet.coin_frozen_buy_position = wallet.coin_frozen_buy_position + #{amount},wallet.coin_buy_position=wallet.coin_buy_position - #{amount} where wallet.id = #{walletId} and wallet.coin_buy_position >= #{amount}
+    </update>
+
+    <select id="findAllNeedSync" resultType="com.bizzan.nirvana.coinswap.entity.MemberContractWalletCoin">
+        select * from member_contract_wallet_coin as wallet where (wallet.coin_buy_position > 0 or wallet.coin_sell_position > 0 or wallet.coin_frozen_buy_position > 0 or wallet.coin_frozen_sell_position > 0) and wallet.contract_id=#{contractId}
+    </select>
+    <select id="getWalletsByBuyPosition" resultType="com.bizzan.nirvana.coinswap.entity.MemberContractWalletCoin">
+        select * from member_contract_wallet_coin as wallet
+        where (wallet.coin_buy_position > 0 or wallet.coin_frozen_buy_position > 0 ) and wallet.contract_id=#{contractId}
+    </select>
+    <select id="getWalletsBySellPosition" resultType="com.bizzan.nirvana.coinswap.entity.MemberContractWalletCoin">
+        select * from member_contract_wallet_coin as wallet where (wallet.coin_sell_position > 0 or wallet.coin_frozen_sell_position > 0 ) and wallet.contract_id=#{contractId}
+    </select>
+
+    <update id="blastBuy">
+        update member_contract_wallet_coin wallet set wallet.coin_buy_principal_amount=0,wallet.coin_frozen_buy_position=0,wallet.coin_buy_position=0 where wallet.id = #{walletId}
+    </update>
+
+    <update id="blastSell">
+        update member_contract_wallet_coin wallet set wallet.coin_sell_principal_amount=0,wallet.coin_frozen_sell_position=0,wallet.coin_sell_position=0 where wallet.id = #{walletId}
+    </update>
+
+    <update id="decreaseCoinBalance">
+        update member_contract_wallet_coin wallet set wallet.coin_balance = wallet.coin_balance - #{amount} where wallet.id = #{walletId} and wallet.coin_balance >= #{walletId}
+    </update>
+
+    <update id="thrawCoinSellPosition">
+        update member_contract_wallet_coin wallet set wallet.coin_frozen_sell_position = wallet.coin_frozen_sell_position - #{amount},wallet.coin_sell_position=wallet.coin_sell_position + #{amount} where wallet.id = #{walletId} and wallet.coin_frozen_sell_position >= #{amount}
+    </update>
+
+    <update id="thrawCoinBuyPosition">
+        update member_contract_wallet_coin wallet set wallet.coin_frozen_buy_position = wallet.coin_frozen_buy_position - #{amount},wallet.coin_buy_position=wallet.coin_buy_position + #{amount} where wallet.id = #{walletId} and wallet.coin_frozen_buy_position >= #{amount}
+    </update>
+
+    <update id="increaseCoinBuyPrincipalAmount">
+        update member_contract_wallet_coin wallet set wallet.coin_buy_principal_amount=wallet.coin_buy_principal_amount + #{amount},wallet.coin_balance=wallet.coin_balance - #{amount} where wallet.id = #{walletId} and wallet.coin_balance >= #{amount}
+    </update>
+
+    <update id="modifyCoinBuyAndSellLeverage">
+        update member_contract_wallet_coin wallet set wallet.coin_sell_leverage = #{leverage} ,wallet.coin_buy_leverage= #{leverage}  where wallet.id = #{walletId}
+    </update>
+
+    <update id="increaseCoinSellPrincipalAmount">
+        update member_contract_wallet_coin wallet set wallet.coin_sell_principal_amount=wallet.coin_sell_principal_amount + #{amount},wallet.coin_balance=wallet.coin_balance - #{amount} where wallet.id = #{walletId} and wallet.coin_balance >= #{amount}
+    </update>
+
+    <update id="decreaseCoinBuyPrincipalAmount">
+        update member_contract_wallet_coin wallet set wallet.coin_balance=wallet.coin_balance + #{amount},wallet.coin_buy_principal_amount=wallet.coin_buy_principal_amount - #{amount} where wallet.id = #{walletId} and wallet.coin_buy_principal_amount >= #{amount}
+    </update>
+
+    <update id="decreaseCoinSellPrincipalAmount">
+        update member_contract_wallet_coin wallet set wallet.coin_balance=wallet.coin_balance + #{amount},wallet.coin_sell_principal_amount=wallet.coin_sell_principal_amount - #{amount} where wallet.id = #{walletId} and wallet.coin_sell_principal_amount >= #{amount}
+    </update>
+    <update id="justDecreaseCoinBuyPrincipalAmount">
+        update member_contract_wallet_coin wallet set wallet.coin_buy_principal_amount=wallet.coin_buy_principal_amount - #{amount} where wallet.id = #{walletId}
+    </update>
+    <update id="justIncreaseCoinSellPrincipalAmount">
+        update member_contract_wallet_coin wallet set wallet.coin_sell_principal_amount=wallet.coin_sell_principal_amount + #{amount} where wallet.id = #{walletId}
+    </update>
+    <update id="justDecreaseCoinSellPrincipalAmount">
+        update member_contract_wallet_coin wallet set wallet.coin_sell_principal_amount=wallet.coin_sell_principal_amount - #{amount} where wallet.id = #{walletId}
+    </update>
+    <update id="justIncreaseCoinBuyPrincipalAmount">
+        update member_contract_wallet_coin wallet set wallet.coin_buy_principal_amount=wallet.coin_buy_principal_amount + #{amount} where wallet.id = #{walletId}
+    </update>
+
+</mapper>

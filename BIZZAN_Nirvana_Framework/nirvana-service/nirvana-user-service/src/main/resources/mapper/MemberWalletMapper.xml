@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bizzan.nirvana.user.mapper.MemberWalletMapper">
+
+    <update id="decreaseBalance">
+        update member_wallet wallet set wallet.balance = wallet.balance - #{amount} where wallet.id = #{walletId} and wallet.balance &gt;= #{amount}
+    </update>
+
+    <update id="increaseBalance">
+        update member_wallet wallet set wallet.balance = wallet.balance + #{amount} where wallet.id = #{walletId}
+    </update>
+    <update id="decreaseFrozen">
+        update member_wallet wallet set wallet.frozen_balance=wallet.frozen_balance - #{amount} where wallet.id = #{walletId} and wallet.frozen_balance &gt;= #{amount}
+    </update>
+    <update id="thawBalance">
+        update member_wallet  set balance = balance + #{amount},frozen_balance=frozen_balance - #{amount}
+        <where>
+            id = #{walletId} and frozen_balance &gt;= #{amount}
+        </where>
+    </update>
+    <select id="getBalance" resultType="com.bizzan.nirvana.user.dto.MemberWalletDTO">
+        select mw.id,mw.member_id,m.username,m.real_name,m.email,m.mobile_phone,mw.balance,mw.coin_id as unit,mw.frozen_balance,mw.balance+mw.frozen_balance as all_balance from  member_wallet mw
+        left join member m on m.id=mw.member_id
+        <where>
+            <if test="screen.account !=null and screen.account !=''">
+                (m.username like concat('%',#{screen.account},'%')
+                     or m.mobile_phone like concat('%',#{screen.account},'%')
+                     or m.email like concat('%',#{screen.account},'%')
+                     or m.real_name like concat('%',#{screen.account},'%')
+                )
+            </if>
+            <if test="screen.unit!=null and screen.unit!=''">
+                and mw.coin_id = #{screen.unit}
+            </if>
+            <if test="screen.maxAllBalance!=null">
+                and (mw.balance+mw.frozen_balance) &lt;= #{screen.maxAllBalance}
+            </if>
+            <if test="screen.minAllBalance!=null">
+                and (mw.balance+mw.frozen_balance) &gt;= #{screen.minAllBalance}
+            </if>
+            <if test="screen.maxBalance!=null">
+                and mw.balance &lt;= #{screen.maxBalance}
+            </if>
+            <if test="screen.minBalance!=null">
+                and mw.balance &gt;= #{screen.minBalance}
+            </if>
+            <if test="screen.minFrozenBalance!=null">
+                and mw.frozen_balance &gt;= #{screen.minFrozenBalance}
+            </if>
+            <if test="screen.maxFrozenBalance!=null">
+                and mw.frozen_balance &lt;= #{screen.maxFrozenBalance}
+            </if>
+        </where>
+    </select>
+</mapper>

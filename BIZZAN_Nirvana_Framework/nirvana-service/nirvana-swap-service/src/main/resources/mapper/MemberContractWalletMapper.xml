@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bizzan.nirvana.swap.mapper.MemberContractWalletMapper">
+
+    <update id="modifyUsdtBuyLeverage">
+        update member_contract_wallet wallet set wallet.usdt_buy_leverage = #{leverage} where wallet.id = #{walletId}
+    </update>
+
+    <update id="modifyUsdtSellLeverage">
+        update member_contract_wallet wallet set wallet.usdt_sell_leverage = #{leverage} where wallet.id = #{walletId}
+    </update>
+
+    <update id="decreaseUsdtFrozen">
+        update member_contract_wallet wallet set wallet.usdt_frozen_balance=wallet.usdt_frozen_balance - #{amount} where wallet.id = #{walletId} and wallet.usdt_frozen_balance >= #{amount}
+    </update>
+
+    <update id="thawUsdtBalance">
+        update member_contract_wallet wallet set wallet.usdt_balance = wallet.usdt_balance + #{amount},wallet.usdt_frozen_balance=wallet.usdt_frozen_balance - #{amount} where wallet.id = #{walletId} and wallet.usdt_frozen_balance >= #{amount}
+    </update>
+
+    <update id="freezeUsdtBalance">
+        update member_contract_wallet wallet set wallet.usdt_balance = wallet.usdt_balance - #{amount},wallet.usdt_frozen_balance=wallet.usdt_frozen_balance + #{amount} where wallet.id = #{walletId} and wallet.usdt_balance >= #{amount}
+    </update>
+
+    <update id="increaseUsdtBuyPrincipalAmountWithFrozen">
+        update member_contract_wallet wallet set wallet.usdt_buy_principal_amount=wallet.usdt_buy_principal_amount + #{amount},wallet.usdt_frozen_balance=wallet.usdt_frozen_balance - #{amount} where wallet.id = #{walletId} and wallet.usdt_frozen_balance >= #{amount}
+    </update>
+
+    <update id="increaseUsdtSellPrincipalAmountWithFrozen">
+        update member_contract_wallet wallet set wallet.usdt_sell_principal_amount=wallet.usdt_sell_principal_amount + #{amount},wallet.usdt_frozen_balance=wallet.usdt_frozen_balance - #{amount} where wallet.id = #{walletId} and wallet.usdt_frozen_balance >= #{amount}
+    </update>
+
+    <update id="updateUsdtBuyPriceAndPosition">
+        update member_contract_wallet wallet set wallet.usdt_buy_price=#{avaPrice},wallet.usdt_buy_position=wallet.usdt_buy_position + #{volume} where wallet.id = #{walletId}
+    </update>
+
+    <update id="updateUsdtSellPriceAndPosition">
+        update member_contract_wallet wallet set wallet.usdt_sell_price=#{avaPrice},wallet.usdt_sell_position=wallet.usdt_sell_position + #{volume} where wallet.id = #{walletId}
+    </update>
+
+    <update id="updateShareNumber">
+        update member_contract_wallet wallet set wallet.usdt_share_number=#{shareNumber} where wallet.id = #{walletId}
+    </update>
+
+    <update id="decreaseUsdtFrozenSellPositionAndPrincipalAmount">
+        update member_contract_wallet wallet set wallet.usdt_sell_principal_amount=wallet.usdt_sell_principal_amount - #{pAmount},wallet.usdt_frozen_sell_position=wallet.usdt_frozen_sell_position - #{volume} where wallet.id = #{walletId} and wallet.usdt_sell_principal_amount>=#{pAmount} and wallet.usdt_frozen_sell_position>=#{volume}
+    </update>
+
+    <update id="increaseUsdtBalance">
+        update member_contract_wallet wallet set wallet.usdt_balance = wallet.usdt_balance + #{amount} where wallet.id = #{walletId}
+    </update>
+
+    <update id="increaseUsdtProfit">
+        update member_contract_wallet wallet set wallet.usdt_profit=wallet.usdt_profit+#{amount} where wallet.id = #{walletId}
+    </update>
+
+    <update id="increaseUsdtLoss">
+        update member_contract_wallet wallet set wallet.usdt_loss=wallet.usdt_loss+#{amount} where wallet.id = #{walletId}
+    </update>
+
+    <update id="decreaseUsdtFrozenBuyPositionAndPrincipalAmount">
+        update member_contract_wallet wallet set wallet.usdt_buy_principal_amount=wallet.usdt_buy_principal_amount - #{pAmount},wallet.usdt_frozen_buy_position=wallet.usdt_frozen_buy_position - #{volume} where wallet.id = #{walletId} and wallet.usdt_buy_principal_amount>=#{pAmount} and wallet.usdt_frozen_buy_position>=#{volume}
+    </update>
+
+    <update id="freezeUsdtSellPosition">
+        update member_contract_wallet wallet set wallet.usdt_frozen_sell_position = wallet.usdt_frozen_sell_position + #{amount},wallet.usdt_sell_position=wallet.usdt_sell_position - #{amount} where wallet.id = #{walletId} and wallet.usdt_sell_position >= #{amount}
+    </update>
+
+    <update id="freezeUsdtBuyPosition">
+        update member_contract_wallet wallet set wallet.usdt_frozen_buy_position = wallet.usdt_frozen_buy_position + #{amount},wallet.usdt_buy_position=wallet.usdt_buy_position - #{amount} where wallet.id = #{walletId} and wallet.usdt_buy_position >= #{amount}
+    </update>
+
+    <select id="findAllNeedSync" resultType="com.bizzan.nirvana.swap.entity.MemberContractWallet">
+        select * from member_contract_wallet as wallet where (wallet.usdt_buy_position > 0 or wallet.usdt_sell_position > 0 or wallet.usdt_frozen_buy_position > 0 or wallet.usdt_frozen_sell_position > 0) and wallet.contract_id=#{contractId}
+    </select>
+    <select id="getWalletsByBuyPosition" resultType="com.bizzan.nirvana.swap.entity.MemberContractWallet">
+        select * from member_contract_wallet as wallet
+        where (wallet.usdt_buy_position > 0 or wallet.usdt_frozen_buy_position > 0 ) and wallet.contract_id=#{contractId}
+    </select>
+    <select id="getWalletsBySellPosition" resultType="com.bizzan.nirvana.swap.entity.MemberContractWallet">
+        select * from member_contract_wallet as wallet where (wallet.usdt_sell_position > 0 or wallet.usdt_frozen_sell_position > 0 ) and wallet.contract_id=#{contractId}
+    </select>
+
+    <update id="blastBuy">
+        update member_contract_wallet wallet set wallet.usdt_buy_principal_amount=0,wallet.usdt_frozen_buy_position=0,wallet.usdt_buy_position=0 where wallet.id = #{walletId}
+    </update>
+
+    <update id="blastSell">
+        update member_contract_wallet wallet set wallet.usdt_sell_principal_amount=0,wallet.usdt_frozen_sell_position=0,wallet.usdt_sell_position=0 where wallet.id = #{walletId}
+    </update>
+
+    <update id="decreaseUsdtBalance">
+        update member_contract_wallet wallet set wallet.usdt_balance = wallet.usdt_balance - #{amount} where wallet.id = #{walletId} and wallet.usdt_balance >= #{walletId}
+    </update>
+
+    <update id="thrawUsdtSellPosition">
+        update member_contract_wallet wallet set wallet.usdt_frozen_sell_position = wallet.usdt_frozen_sell_position - #{amount},wallet.usdt_sell_position=wallet.usdt_sell_position + #{amount} where wallet.id = #{walletId} and wallet.usdt_frozen_sell_position >= #{amount}
+    </update>
+
+    <update id="thrawUsdtBuyPosition">
+        update member_contract_wallet wallet set wallet.usdt_frozen_buy_position = wallet.usdt_frozen_buy_position - #{amount},wallet.usdt_buy_position=wallet.usdt_buy_position + #{amount} where wallet.id = #{walletId} and wallet.usdt_frozen_buy_position >= #{amount}
+    </update>
+
+    <update id="increaseUsdtBuyPrincipalAmount">
+        update member_contract_wallet wallet set wallet.usdt_buy_principal_amount=wallet.usdt_buy_principal_amount + #{amount},wallet.usdt_balance=wallet.usdt_balance - #{amount} where wallet.id = #{walletId} and wallet.usdt_balance >= #{amount}
+    </update>
+
+    <update id="modifyUsdtBuyAndSellLeverage">
+        update member_contract_wallet wallet set wallet.usdt_sell_leverage = #{leverage} ,wallet.usdt_buy_leverage= #{leverage}  where wallet.id = #{walletId}
+    </update>
+
+    <update id="increaseUsdtSellPrincipalAmount">
+        update member_contract_wallet wallet set wallet.usdt_sell_principal_amount=wallet.usdt_sell_principal_amount + #{amount},wallet.usdt_balance=wallet.usdt_balance - #{amount} where wallet.id = #{walletId} and wallet.usdt_balance >= #{amount}
+    </update>
+
+    <update id="decreaseUsdtBuyPrincipalAmount">
+        update member_contract_wallet wallet set wallet.usdt_balance=wallet.usdt_balance + #{amount},wallet.usdt_buy_principal_amount=wallet.usdt_buy_principal_amount - #{amount} where wallet.id = #{walletId} and wallet.usdt_buy_principal_amount >= #{amount}
+    </update>
+
+    <update id="decreaseUsdtSellPrincipalAmount">
+        update member_contract_wallet wallet set wallet.usdt_balance=wallet.usdt_balance + #{amount},wallet.usdt_sell_principal_amount=wallet.usdt_sell_principal_amount - #{amount} where wallet.id = #{walletId} and wallet.usdt_sell_principal_amount >= #{amount}
+    </update>
+    <update id="justDecreaseUsdtBuyPrincipalAmount">
+        update member_contract_wallet wallet set wallet.usdt_buy_principal_amount=wallet.usdt_buy_principal_amount - #{amount} where wallet.id = #{walletId}
+    </update>
+    <update id="justIncreaseUsdtSellPrincipalAmount">
+        update member_contract_wallet wallet set wallet.usdt_sell_principal_amount=wallet.usdt_sell_principal_amount + #{amount} where wallet.id = #{walletId}
+    </update>
+    <update id="justDecreaseUsdtSellPrincipalAmount">
+        update member_contract_wallet wallet set wallet.usdt_sell_principal_amount=wallet.usdt_sell_principal_amount - #{amount} where wallet.id = #{walletId}
+    </update>
+    <update id="justIncreaseUsdtBuyPrincipalAmount">
+        update member_contract_wallet wallet set wallet.usdt_buy_principal_amount=wallet.usdt_buy_principal_amount + #{amount} where wallet.id = #{walletId}
+    </update>
+</mapper>

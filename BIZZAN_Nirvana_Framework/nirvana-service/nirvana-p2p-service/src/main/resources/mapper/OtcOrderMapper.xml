@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bizzan.nirvana.p2p.mapper.OtcOrderMapper">
+
+    <update id="cancelOrder">
+        update otc_order a set a.cancel_time=#{date},a.status=#{status}
+        where (a.status=1 or a.status=2 or a.status=4) and a.order_sn=#{orderSn}
+    </update>
+    <update id="payForOrder">
+        update otc_order a set a.pay_time=#{date},a.status=#{status} where a.status=1 and a.order_sn=#{orderSn}
+    </update>
+    <update id="releaseOrder">
+        update otc_order a set a.release_time=#{date},a.status=#{status} where (a.status=2 or a.status=4) and a.order_sn=#{orderSn}
+    </update>
+    <update id="updateAppealOrder">
+        update otc_order a set a.status=#{status} where a.status=2 and a.order_sn=#{orderSn}
+    </update>
+    <select id="findAllExpiredOrder" resultType="com.bizzan.nirvana.p2p.entity.OtcOrder">
+        select a.* from otc_order a
+        <where>
+            timestampdiff(MINUTE,a.create_Time,#{date}) &gt;= a.time_limit and a.status=1
+        </where>
+    </select>
+    <select id="outExcel" resultType="com.bizzan.nirvana.vo.OtcOrderVO">
+        select
+            o.id,o.order_sn,o.advertise_type,o.create_time,
+            o.member_name,o.customer_name,c.unit,o.money,
+            o.number,o.commission as fee,o.pay_mode,o.release_time,
+            o.cancel_time,o.pay_time,o.`status`
+        from otc_order o
+        left join otc_coin c on c.id = o.coin_id
+        <where>
+            <if test="screen.orderSn!=null and screen.orderSn!=''">
+               o.order_sn = #{screen.orderSn}
+            </if>
+            <if test="screen.startTime!=null">
+               and o.create_time &gt;= #{screen.startTime}
+            </if>
+            <if test="screen.endTime!=null">
+                and o.create_time &lt; #{screen.endTime}
+            </if>
+            <if test="screen.status!=null">
+                and o.status = #{screen.status}
+            </if>
+            <if test="screen.unit!=null and screen.unit!=''">
+                and c.unit = #{screen.unit}
+            </if>
+            <if test="screen.memberName!=null and screen.memberName!=''">
+                and ( o.member_name like concat('%',#{screen.memberName},'%')
+                or o.member_real_name like concat('%',#{screen.memberName},'%'))
+            </if>
+            <if test="screen.customerName!=null and screen.customerName!=''">
+                and ( o.customer_name like concat('%',#{screen.customerName},'%')
+                or o.customer_real_name like concat('%',#{screen.customerName},'%'))
+            </if>
+            <if test="screen.minMoney!=null">
+                and o.money &gt;= #{screen.minMoney}
+            </if>
+            <if test="screen.maxMoney!=null">
+                and o.money &lt;= #{screen.maxMoney}
+            </if>
+            <if test="screen.minNumber!=null">
+                and o.number &gt;= #{screen.minNumber}
+            </if>
+            <if test="screen.maxNumber!=null">
+                and o.number &lt;= #{screen.maxNumber}
+            </if>
+            <if test="screen.advertiseType!=null">
+                and o.advertise_type = #{screen.advertiseType}
+            </if>
+        </where>
+    </select>
+
+</mapper>

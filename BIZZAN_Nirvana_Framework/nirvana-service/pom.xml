@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>nirvana</artifactId>
+        <groupId>com.bizzan</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>nirvana-service</artifactId>
+    <packaging>pom</packaging>
+    <description>
+        所有微服务工程父工程
+    </description>
+    <modules>
+        <module>nirvana-user-service</module>
+        <module>nirvana-permission-service</module>
+        <module>nirvana-active-service</module>
+        <module>nirvana-admin-service</module>
+        <module>nirvana-exchange-service</module>
+        <module>nirvana-market-service</module>
+        <module>nirvana-match-service</module>
+        <module>nirvana-swap-service</module>
+        <module>nirvana-second-service</module>
+        <module>nirvana-option-service</module>
+        <module>nirvana-p2p-service</module>
+        <module>nirvana-robot-market-service</module>
+        <module>nirvana-robot-normal-service</module>
+        <module>nirvana-coinswap-service</module>
+        <module>nirvana-earn-service</module>
+    </modules>
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+    <dependencies>
+        <!-- jar 依赖 -->
+        <dependency>
+            <groupId>com.bizzan</groupId>
+            <artifactId>nirvana-service-dependency</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!--工具包 依赖-->
+        <dependency>
+            <groupId>com.bizzan</groupId>
+            <artifactId>nirvana-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+</project>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bizzan.nirvana.user.mapper.WithdrawRecordMapper">
+
+    <select id="joinFind" resultType="com.bizzan.nirvana.user.entity.WithdrawRecord">
+        select r.*,m.username,m.registration_time
+        from withdraw_record r
+        left join member m on r.member_id = m.id
+        left join coin c on r.coin_id = c.id
+        <where>
+            <if test="screen.memberId!=null">
+                r.member_id = #{memberId}
+            </if>
+            <if test="screen.transactionNumber!=null and screen.transactionNumber != ''">
+                r.transaction_number = #{screen.transactionNumber}
+            </if>
+            <if test="screen.status !=null">
+                r.status = #{screen.status}
+            </if>
+            <if test="screen.isAuto!=null">
+                r.is_auto= #{screen.isAuto}
+            </if>
+            <if test="screen.address!=null and screen.address != ''">
+                r.address = #{screen.address}
+            </if>
+            <if test="screen.address!=null and screen.address != ''">
+                a.address = #{screen.address}
+            </if>
+            <if test="screen.unit!=null">
+                c.unit= #{screen.unit}
+            </if>
+            <if test="screen.account!=null and screen.account!=''">
+                and ( m.username like concat('%',#{screen.account},'%') or m.real_name like concat('%',#{screen.account},'%') )
+            </if>
+            <if test="screen.inviterId != null">
+                and m.inviter_id = #{screen.inviterId}
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+</mapper>

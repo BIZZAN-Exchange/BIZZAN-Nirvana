@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bizzan.nirvana.p2p.mapper.AppealMapper">
+
+    <select id="appealQuery" resultType="com.bizzan.nirvana.p2p.vo.AppealVo">
+        select a.id as appeal_id,
+               b.member_name as advertise_creater_user_name,
+               b.member_real_name as advertise_creater_name,
+               b.customer_name as customer_user_name,
+               b.customer_real_name as customer_name,
+               b.commission as fee,b.number,b.money,b.order_sn,
+               b.create_time as transaction_time,
+               a.create_time,a.deal_with_time,b.pay_mode, e.name as coin_name,
+               b.status as order_status,
+               a.is_success,b.advertise_type,a.status,a.remark
+        from appeal a
+         left join otc_order b on a.order_id = b.id
+         left join otc_coin e on b.coin_id = e.id
+        <where>
+            b.status != 0
+            <if test="screen.negotiant!=null and screen.negotiant!=''">
+                and (b.customer_name like concat('%',#{screen.negotiant},'%') or b.customer_real_name like concat('%',#{screen.negotiant},'%') )
+            </if>
+            <if test="screen.complainant!=null and screen.complainant!=''">
+                and (b.member_name like concat('%',#{screen.complainant},'%') or b.member_real_name like concat('%',#{screen.complainant},'%') )
+            </if>
+            <if test="screen.advertiseType!=null">
+                and b.advertise_type = #{screen.advertiseType}
+            </if>
+            <if test="screen.success!=null">
+                and a.is_success = #{screen.success} and a.deal_with_time is not null
+            </if>
+            <if test="screen.success==null and screen.auditing!=null and screen.auditing">
+                and a.is_success is null
+            </if>
+            <if test="screen.unit!=null and screen.unit!=''">
+                and lower(e.unit) = #{screen.unit}
+            </if>
+            <if test="screen.status!=null ">
+                and b.status = #{screen.status}
+            </if>
+        </where>
+    </select>
+</mapper>

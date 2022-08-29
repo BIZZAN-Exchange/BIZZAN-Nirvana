@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bizzan.nirvana.user.mapper.MemberSecondWalletMapper">
+
+    <update id="increaseBalance">
+        update member_second_wallet wallet set wallet.balance = wallet.balance + #{amount} where wallet.id = #{walletId}
+    </update>
+
+    <update id="decreaseBalance">
+        update member_second_wallet wallet set wallet.balance = wallet.balance - #{amount} where wallet.id = #{walletId} and wallet.balance >= #{amount}
+    </update>
+    <update id="decreaseFrozen">
+        update member_second_wallet wallet set wallet.frozen_balance=wallet.frozen_balance - #{amount} where wallet.id = #{walletId} and wallet.frozen_balance >= #{amount}
+    </update>
+    <update id="thawBalance">
+        update member_second_wallet wallet set wallet.balance = wallet.balance + #{amount},wallet.frozen_balance=wallet.frozen_balance - #{amount}
+        where wallet.id = #{walletId} and wallet.frozen_balance >= #{amount}
+    </update>
+    <update id="freezeBalance">
+        update member_second_wallet wallet set wallet.balance = wallet.balance - #{amount},wallet.frozen_balance=wallet.frozen_balance + #{amount} where wallet.id = #{walletId} and wallet.balance >= #{amount}
+    </update>
+</mapper>

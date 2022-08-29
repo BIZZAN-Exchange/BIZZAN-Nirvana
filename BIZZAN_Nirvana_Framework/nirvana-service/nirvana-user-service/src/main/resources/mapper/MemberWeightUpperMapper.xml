@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bizzan.nirvana.user.mapper.MemberWeightUpperMapper">
+
+    <select id="findAllByUpperIds" resultType="com.bizzan.nirvana.user.entity.MemberWeightUpper">
+        select * from member_weight_upper where member_id in (#{ids}) order by member_id desc
+    </select>
+</mapper>

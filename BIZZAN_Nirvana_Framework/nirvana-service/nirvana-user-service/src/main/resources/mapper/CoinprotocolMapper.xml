@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bizzan.nirvana.user.mapper.CoinprotocolMapper">
+
+    <select id="allCoinprotocolList" resultType="com.bizzan.nirvana.dto.CoinprotocolDTO">
+        select protocol,protocol_name from coinprotocol
+    </select>
+</mapper>
