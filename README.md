@@ -9,14 +9,14 @@
 ### 提问和建议
 - 加入交流群：区块链交易所技术知识交流群【QQ群:735446452】【QQ:390330302】
 - Telegram:https://t.me/bizzanhevin
-- E-mail:xunibidev@gmail.com
+- E-mail:bizzanhevin@gmail.com
 
 # 捐赠：
 #### 您的捐赠是我们开源最大的动力
-- BTC/USDT(比特币/USDT)：1FCLDUqPaRCbVAf28NMQPuRTqBpkRF3ktX
-- ETH/USDT(以太坊/USDT)：0xdbD24251916D6172A2c1c127035B193e9232F1a5
-- TRX/USDT(波场/USDT)：TJe9eieckNGZDfXfgRp43vXd31BMKybEYr
-- BNB/USDT（币安币/USDT）：0xdbD24251916D6172A2c1c127035B193e9232F1a5
+- BTC/USDT(比特币/USDT)：bc1qz2upj7qnw6wftpqsc5t53uexeczzdsfcxml49d
+- ETH/USDT(以太坊/USDT)：0x07f8dea7297651f3c9720f06d856fa99ed9aa320
+- TRX/USDT(波场/USDT)：TWbZvpU6GAPsZq227hjycuXMGzkfHWq8Sd
+- BNB/USDT（币安币/USDT）：0x07f8dea7297651f3c9720f06d856fa99ed9aa320
 
 #### BIZZAN是一个免费的、开源的数字货币交易系统，她使用目前最流行的Java框架和相关技术开发而成。
 
@@ -39,13 +39,13 @@
 ### Questions and suggestions
 - Join the exchange group: blockchain exchange technical knowledge exchange group [QQ group: 735446452] [QQ: 390330302]
 - Telegram: https://t.me/bizzanhevin
-- E-mail: xunibidev@gmail.com
+- E-mail: bizzanhevin@gmail.com
 ## Donation:
 #### Your donation is the biggest motivation for our open source
-- BTC / usdt (bitcoin / usdt): 1fclduqparcbvaf28nmqpurtqbpkf3ktx
-- Eth / usdt (Ethereum / usdt): 0xdbd24251916d6172a2c127035b193e9232f1a5
-- TRX / usdt (wavefield / usdt): tje9eieckngzdfxfgrp43vxd31bmkybeyr
-- BNB / usdt: 0xdbd24251916d6172a2c127035b193e9232f1a5
+- BTC/USDT(BTC/USDT)：bc1qz2upj7qnw6wftpqsc5t53uexeczzdsfcxml49d
+- ETH/USDT(ETH/USDT)：0x07f8dea7297651f3c9720f06d856fa99ed9aa320
+- TRX/USDT(TRX/USDT)：TWbZvpU6GAPsZq227hjycuXMGzkfHWq8Sd
+- BNB/USDT（BNB/USDT）：0x07f8dea7297651f3c9720f06d856fa99ed9aa320
 #### Bizzan is a free and open-source digital currency trading system. It is developed using the most popular Java framework and related technologies.
 ## Vision
     Our mission is to develop the world's best, high-performance, secure, open-source (key) digital currency trading system with Java. (please ignore our Niubi, because Niubi is blowing too much, and it may become really Niubi slowly.)
