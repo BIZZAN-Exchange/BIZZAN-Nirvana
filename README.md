@@ -2,8 +2,8 @@
 - 基于BIZZAN交易所全新重构（https://gitee.com/bizzan/coin-exchange）
 - springcloud + springboot2.3 + mybatis plus + feign + gateway
 - 数据库：mysql  mongo  redis
-- 配置中心以及注册中心：nacos  
-- 消息中间件：RabitMQ  
+- 配置中心以及注册中心：nacos
+- 消息中间件：RocketMQ
 - 分布式事务：Seata
 - 服务治理：sentinel
 ### 提问和建议
